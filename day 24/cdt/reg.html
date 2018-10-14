@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<fieldset style="margin:20px auto;width:500px">
+		<legend>用户注册</legend>
+		<form action="http://localhost/mywook/day%2024/cdt/reg.php" method="post">
+			<p>用户姓名：<input type="text" name="username"><span></span></p>
+			<p>用户密码：<input type="password" name="pass"><span></span></p>
+			<p>重复密码：<input type="password" name="passwors1"><span></span></p>
+			<p>用户邮箱：<input type="text" name="email"><span></span></p>
+			<p><input type="submit" name="submit" value="确定注册"></p>
+		</form>
+	</fieldset>
+	<script type="text/javascript" src="ajaxfunction.js"></script>
+	<script type="text/javascript">
+		var aInput=document.querySelectorAll('input');
+		var aSpan=document.querySelectorAll('span');
+		aInput[0].onblur=function(){
+			ajax({
+				type:'post',
+				url:'http://localhost/mywook/day%2024/cdt/reg.php',
+				data:{
+					name:aInput[0].value
+				},
+				cgfn:function(da){
+					console.log(da);
+					if(da==1){
+						aSpan[0].innerHTML="用户名已存在";
+						aSpan[0].style.color='red';
+					}else{
+						aSpan[0].innerHTML="√";
+						aSpan[0].style.color='green';
+					}
+				}
+			})
+		}
+	</script>
+</body>
+</html>

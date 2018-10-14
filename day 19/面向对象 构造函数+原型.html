@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr1=new Array(1,2,3,4);
+        var arr2=new Array(1,1,1,1,2,2,2,3,3,3,4,4,4,4);
+        var arr3=new Array(5,15,61,12,36,88,12,4,7,6);
+        //构造push方法
+        Array.prototype.hehe=function(){
+            for(var i=0;i<arguments.length;i++){
+                this[this.length]=arguments[i];
+            }
+            return this.length;
+        }
+        Array.prototype.unique=function(){
+            return [...new Set(this)]
+        }
+        Array.prototype.px=function(){
+            for(var i=0;i<this.length-1;i++){
+                for(var j=0;j<this.length-i-1;j++){
+                    if(this[j]>this[j+1]){
+                        var tmp=this[j];
+                        this[j]=this[j+1];
+                        this[j+1]=tmp;
+                    }
+                }
+            }
+            return this;
+        }
+        console.log("构造Push方法:");
+        console.log(arr1);
+        console.log(arr1.hehe('haha','hi','jj'));
+        console.log(arr1);
+        console.log("构造去重方法:");
+        console.log(arr2);
+        console.log(arr2.unique());
+        console.log("构造正排序方法:");
+        console.log(arr3);
+        console.log(arr3.px());
+
+    </script>
+</body>
+</html>

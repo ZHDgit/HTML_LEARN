@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://gss0.bdstatic.com/5foIcy0a2gI2n2jgoY3K/static/fisp_static/common/module_static_include/module_static_include_fea09a0.css">
+    <link rel="stylesheet" href="http://gss0.bdstatic.com/5foIcy0a2gI2n2jgoY3K/static/fisp_static/news/focustop/focustop_6e4b3ae.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="menu" class="mod-navbar" alog-group="home-menu">
+        <div id="channel-all" class="channel-all clearfix" style="z-index: 9;">
+            <div class="menu-list">
+                <ul class="clearfix lavalamp" style="position: relative;">
+                    <div class="lavalamp-object movebox" style="position: absolute;width:48px;background:#c00;height: 40px; top: 0px; left: 0px; overflow: hidden;"></div>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/">首页</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/guonei">国内</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/guoji">国际</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/mil">军事</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/finance">财经</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/ent">娱乐</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/sports">体育</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/internet">互联网</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/tech">科技</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/game">游戏</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/lady">女人</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/auto">汽车</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="/house">房产</a></li>
+                    <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="http://jian.news.baidu.com/" target="_blank">个性推荐</a></li>
+                </ul>
+            </div>
+            <i class="slogan"></i>
+        </div>
+    </div>
+    <script>
+        var oBox=document.querySelector('.movebox');
+        var aLi=document.querySelectorAll('li');
+        for(var i=0;i<aLi.length;i++){
+            aLi[i].onmousemove=function(){
+                oBox.style.width=this.getElementsByTagName('a')[0].offsetWidth+'px';
+                removeyz(oBox,this.offsetLeft);
+
+            }
+            aLi[i].onmouseout=function(){
+                oBox.style.width=aLi[0].getElementsByTagName('a')[0].offsetWidth+'px';
+                removeyz(oBox,0);
+            }
+        }
+        var timer=null;
+        var speed=0;
+        function removeyz(obj,target){
+            clearInterval(timer);
+            timer=setInterval(function(){
+                    speed+=(target-obj.offsetLeft)/6;//加速度
+                    speed*=0.8;//摩擦力
+                    if(Math.abs(speed)<1 && Math.abs(target-obj.offsetLeft)<1){
+                        clearInterval(timer);
+                        speed=0;
+                        obj.style.left=target+'px';
+                    }
+                    obj.style.left=obj.offsetLeft+speed+'px';
+            },30)
+        }
+    </script>
+</body>
+</html>

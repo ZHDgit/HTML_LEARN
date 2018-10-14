@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<fieldset style="margin:20px auto;width:500px">
+		<legend>用户登录</legend>
+		<form action="" method="post">
+			<p>用户姓名：<input type="text" name="username"><span></span></p>
+			<p>用户密码：<input type="password" name="passworsd"><span></span></p>
+			<p><input type="button" name="submit" value="确定登录">   <a href="reg.html">注册</a></p>
+		</form>
+	</fieldset>
+	<script type="text/javascript" src="ajaxfunction.js"></script>
+	<script type="text/javascript" src="cookie.js"></script>
+	<script type="text/javascript">
+		var aInput=document.querySelectorAll('input');
+		var aSpan=document.querySelectorAll('span');
+		aInput[2].onclick=function(){
+			ajax({
+			type:'post',
+			url:'login.php',
+			data:{
+				name:aInput[0].value,
+				pass:aInput[1].value,
+			},
+			cgfn:function(s){
+				if(!!s){
+					addcookie('username',aInput[0].value,7);
+					location.href='index.html';
+				}else{
+					alert('账号密码错误');
+					aInput[0].focus();
+				}
+			}
+
+		});
+		}
+	</script>
+</body>
+</html>

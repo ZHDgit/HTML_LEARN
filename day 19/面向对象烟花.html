@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;
+        margin:0}
+        body{
+            width:100%;
+            height:100%;
+            background:#000;
+            position:relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script src="buffmotion.js"></script>
+    <script>
+        function Firework(x,y){
+            this.x=x;
+            this.y=y;
+            var that=this;
+            //1.创建盒子
+            this.createbox=function(){
+                this.firebox=document.createElement('div');
+                this.firebox.style.cssText=`width:5px;height:5px;position:absolute;background:red;
+                left:${this.x}px;top:${document.documentElement.clientHeight}px;`;
+                document.body.appendChild(this.firebox);
+                this.firemove();
+            };
+            //2.盒子飞到鼠标位置
+            this.firemove=function(){
+                buffermotion(this.firebox,{top:this.y},function(){
+                    document.body.removeChild(that.firebox);
+                    that.fragment()                   
+                });
+            };
+            //3.随机产生烟花碎片
+            this.fragment=function(){
+                for(var i=0;i<this.round(30,60);i++){
+                    var sp=document.createElement('div');
+                    sp.style.cssText=`width:5px;height:5px;position:absolute;
+                    background:rgb(${this.round(0,255)},${this.round(0,255)},${this.round(0,255)});
+                    left:${this.x}px;top:${this.y}px;`;
+                    document.body.appendChild(sp);
+                    this.spmove(sp);
+                }
+            }
+            //4.碎片运动
+            this.spmove=function(obj){
+                var initx=this.x;
+                var inity=this.y;
+                var speedx=parseInt((Math.random()>0.5?'-':'')+this.round(1,15));
+                var speedy=parseInt((Math.random()>0.5?'-':'')+this.round(1,15));
+                obj.timer=setInterval(function(){
+                    initx+=speedx;
+                    inity+=speedy++;
+                    if(inity>=document.documentElement.clientHeight){
+                        clearInterval(obj.timer);
+                        document.body.removeChild(obj);
+                    }
+                    obj.style.left=initx+'px';
+                    obj.style.top=inity+'px';
+                },30)
+            }
+            //随机函数
+            this.round=function(min,max){
+                return Math.round(Math.random()*(max-min))+min;
+            }
+
+        }
+        document.onclick=function(ev){
+            var ev=ev||window.event;
+            new Firework(ev.clientX,ev.clientY).createbox();
+        }
+        
+    </script>
+</body>
+</html>

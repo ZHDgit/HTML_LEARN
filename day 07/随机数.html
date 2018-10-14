@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var num= [];
+        for(var i = 48;i <= 57;num.push(i),i++);
+        for(var i = 65;i <= 90;num.push(i),i++);
+        for(var i = 97;i <= 122;num.push(i),i++);
+        var arr = [];
+        for(var i = 0;i < 4;i++){
+            var index = Math.floor(Math.random() * num.length);
+            var char = String.fromCharCode(num[index]);
+            arr.push(char);
+        }
+        var code = arr.join("")
+        
+        document.write("当前验证码是："+code);
+        // var add = [1,2,3,4,3,2,1];
+        // var t = add.indexOf(2,3);
+        // document.write(t);
+        </script>
+</body>
+</html>

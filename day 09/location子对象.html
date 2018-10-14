@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1.location.href(取地址) || search（取地址栏？后面的内容）||reload（如果带一个参数true，代表从缓存中取页面刷新）
+        alert(window.location.href);
+        setTimeout(function(){
+            location.href='http://www.baidu.com'
+        },2000)
+        alert(1);
+        location.reload(true);//一直刷新页面
+
+        //2.history.back();(返回到前一个页面)  || forward()(前进到下一个已缓存的页面);  || go();(正数为前进负数是返回，大小就是跳转几页)
+        //3.navigator.userAgent获取用户浏览器版本信息级操作系统
+            console.log(navigator.userAgent);
+    </script>
+</body>
+</html>

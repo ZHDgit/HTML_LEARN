@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		tr{margin:5px;}
+		td{margin:2px;}
+
+	</style>
+</head>
+<body>
+	情输入查询的城市：<input type="text"><button>提交</button>
+	<fieldset style="width:500px;margin-top:50px">
+		<legend></legend>
+		<table border="1">
+
+		</table>
+	</fieldset>
+	<script type="text/javascript">
+		var le=document.querySelector('legend');
+		var btn=document.querySelector('button');
+		var int=document.querySelector('input');
+		btn.onclick=function(){
+			var ajax=new XMLHttpRequest();
+			ajax.open('get','http://localhost/mywook/day%2023/tianqi.php?city='+int.value,true);
+			ajax.send();
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						var arr=JSON.parse(ajax.responseText);
+						var cs=arr.cityInfo.city;
+						var datt=arr.data.forecast;
+						var str='';
+						le.innerHTML=cs;
+						for(var i=0;i<datt.length;i++){
+							str+='<tr>';
+							for(var j in datt[i]){
+								str+='<td>'+datt[i][j]+'</td>'
+							}
+							str+='</tr>'
+						}
+						document.querySelector('table').innerHTML=str;
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

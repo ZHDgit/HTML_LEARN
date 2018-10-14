@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript" src="ajaxfuction.js"></script>
+	<script type="text/javascript">
+		var hh={
+			num:500,
+			age:500
+		}
+	var hht=[1,2,3,4];
+		ajax({
+			url:'ajax.php',
+			data:hh,
+			cgfn:function(d){
+				alert(d);
+			}
+		}
+		);
+	</script>
+</body>
+</html>

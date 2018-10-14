@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function djs(){
+            var wl=new Date('2018/9/30 18:00:00');
+            var dq=new Date();
+            var time=parseInt((dq-wl)/1000);//一共多少秒
+            var day=parseInt(time/86400);//天
+            var hour=parseInt(time % 86400 /3600);//小时
+            var min=parseInt(time%3600/60);//分钟
+            var sec=parseInt(time%60);//秒
+            return '距离国庆还有：'+day+'天'+hour+'小时'+min+'分'+sec+'秒';
+        }
+        document.body.innerHTML=djs();
+        setInterval(function(){
+            document.body.innerHTML=djs();
+        },1000);
+    
+    
+    </script>
+</body>
+</html>

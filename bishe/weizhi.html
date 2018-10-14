@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+html{height:100%}
+body{height:100%;margin:0px;padding:0px;position:relative;}
+.r-result{
+	positon: absolute;
+	left: 10px;
+	top: 20px;
+}
+#container{height:100%}
+		#r-result,#r-result table{width:100%;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=s4773b810AEnjddfl5aX71pI85xGAKFi">
+//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+</script>
+</head>
+
+<body>
+	<div id="l-map"></div>
+	<div id="r-result"></div>
+<div id="container"></div>
+<script type="text/javascript">
+// 	var x;
+// 	var y;
+
+
+
+// 	var geolocation = new BMap.Geolocation();
+// 	geolocation.getCurrentPosition(function(r){
+// 		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+// 			var mk = new BMap.Marker(r.point);
+// 			map.addOverlay(mk);
+// 			map.panTo(r.point);
+// 			x=r.point.lng;
+// 			y=r.point.lat;
+// 		}
+// 		else {
+// 			alert('failed'+this.getStatus());
+// 		}
+// 	},{enableHighAccuracy: true})
+ var map = new BMap.Map("container");
+// 创建地图实例
+var point = new BMap.Point(108.94226,34.12926);
+// 创建点坐标
+map.centerAndZoom(point, 15);
+var marker = new BMap.Marker(point);        // 创建标注
+map.addOverlay(marker);
+
+//将调整平移缩放地图控件的外观
+var opts = {type: BMAP_NAVIGATION_CONTROL_LARGE}
+map.addControl(new BMap.NavigationControl(opts));
+map.enableScrollWheelZoom(true);  //开启鼠标滚轮缩放
+
+	// 百度地图API功能
+var walking = new BMap.WalkingRoute(map, {
+    renderOptions: {
+        map: map,
+        autoViewport: true
+    }
+});
+var start = new BMap.Point(108.94226,34.12926);
+var end = new BMap.Point(108.940012,34.12795);
+walking.search(start, end);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body{
+            height:100%
+        }
+        /* html{font-size:13.33rem} */
+        body{
+            font:'微软雅黑' 14px;
+        }
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:810px;
+            height:714px;
+            border:2px solid red;
+            float:left;
+            margin-top:9px;
+            margin-left:10px;
+        }
+        .bt1{
+            border:0;
+            width:40px;
+            height:40px;
+        }
+        .p1{
+          border-bottom:1px solid #333;
+          text-indent:100px;
+          margin-bottom:10px;  
+        }
+        li{
+            float:left;
+            list-style:none
+            
+        }
+        .li1{
+            width:266px;
+            border:1px solid blue;
+            height:234px;
+            margin:1px;
+        }
+        .li2{
+            width:198.5px;
+            border:1px solid blue;
+            height:174.5px;
+            margin:1px; 
+        }
+        .li3{
+            width:158px;
+            border:1px solid blue;
+            height:138.8px;
+            margin:1px; 
+        }
+        .fireworks{
+            width:360px;
+            height:750px;
+            background:#000;
+            position:absolute;
+            left:1150px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset style="width:300px;height:700px;float:left;margin-left:10px;">
+        <legend style="margin-left:50px">张鸿制作游戏</legend>
+        <p style="margin:46px 86px;">请选择游戏难度</p>
+        <button class="bt1">简单</button><p class="p1">该模式是图片分成8块。</p>
+        <button class="bt1">普通</button><p class="p1">该模式是图片分成15块。</p>
+        <button class="bt1">困难</button><p class="p1">该模式是图片分成24块。</p>
+    </fieldset>
+    <div id="box">
+        <ul style="width:100%">
+
+        </ul>
+    </div>
+    <div class='fireworks'>
+        <button>成功测试</button>
+        <p style="color:#fff">加油！你可以成功的。加油加油！！！</p>
+    </div>
+    <script>
+        var youwin=true;
+        var obt=document.querySelectorAll('button');
+        var oul=document.querySelector('ul');
+        //选取难度
+        obt[0].onclick=function(){
+            create1(1);           
+        }
+        obt[1].onclick=function(){
+            create1(2);
+        }
+        obt[2].onclick=function(){
+            create1(3);
+        }
+        //判断点击哪个难度
+        function create1(t){
+            if(t==1){
+                var OLi=document.querySelectorAll('li');
+                for(var j=0;j<OLi.length;j++){                
+                    oul.removeChild(OLi[j]);
+                }
+                for(var i=0;i<9;i++){
+                   var aLi=document.createElement('li');
+                   aLi.className='li1'
+                   oul.appendChild(aLi);
+                }   
+                          
+            }
+            if(t==2){
+                var OLi=document.querySelectorAll('li');
+                for(var j=0;j<OLi.length;j++){               
+                    oul.removeChild(OLi[j]);
+                }
+                for(var i=0;i<16;i++){
+                   var aLi=document.createElement('li');
+                   aLi.className='li2'
+                  oul.appendChild(aLi);
+                }             
+            }
+            if(t==3){
+                var OLi=document.querySelectorAll('li');
+                for(var j=0;j<OLi.length;j++){               
+                    oul.removeChild(OLi[j]);
+                }
+                for(var i=0;i<25;i++){
+                   var aLi=document.createElement('li');
+                   aLi.className='li3'
+                  oul.appendChild(aLi);
+                }             
+            }
+        }
+        //判断游戏成功没
+        obt[3].onclick=function(){
+            if(youwin==true){
+                win();
+            }
+        }
+        
+        //游戏成功放烟花
+        function ranNum(min,max){
+            return Math.round(Math.random()*(max-min))+min;
+        }
+        var num=30;
+        var radian=2*Math.PI/num;
+        function add(x,y){                     
+            for(var i=0;i<num;i++){
+              var cDiv=document.createElement('div');
+                cDiv.style.cssText=`width:5px;height:5px;background:
+                rgb(${ranNum(0,255)},${ranNum(0,255)},${ranNum(0,255)});left:${x}px;top:${y}px;position:absolute;`;
+                document.body.appendChild(cDiv);
+                yd(cDiv,x,y,i);
+            }           
+        }
+        function yd(obj,a,b,i){
+            var r=0.9;
+            obj.timer=setInterval(function(){
+                r+=0.5;
+                if(r>=5){
+                    clearInterval(obj.timer);
+                    document.body.removeChild(obj);
+                }
+                //圆形烟花--半径大一点
+                // obj.style.left=a+Math.sin(radian*i)*r+'px';
+                // obj.style.top=b+Math.cos(radian*i)*r+'px';
+                //心形烟花
+                obj.style.left=a+16*Math.pow(Math.sin(radian*i),3)*r+'px';
+                obj.style.top=b-(13*Math.cos(radian*i)-5*Math.cos(2*radian*i)-2*Math.cos(3*radian*i)-Math.cos(4*radian*i))*r+'px';
+
+            },100)
+        }
+        var time=0;
+        function win(){
+        document.timer=setInterval(function(ev){
+            var ev=ev||window.event;
+            add(ranNum(1150,1400),ranNum(0,320));
+            time++;
+        if(time==20){
+            clearInterval(document.timer);
+            // op[0].style.display='none';
+            // op[1].style.display='block';
+        }
+        },300);}
+    </script>
+</body>
+</html>

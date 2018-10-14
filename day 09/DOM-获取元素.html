@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap">
+        <div id="box" class="cla1">
+            <ul>
+                <li>11111111</li>
+                <li>22222222</li>
+                <li>33333333</li>
+                <li>44444444</li>
+                <li>55555555</li>
+            </ul>
+        </div>
+        <div id="box2" class="cla1">
+            <ol>
+                <li>aaaaaaaaa</li>
+                <li>bbbbbbbbb</li>
+                <li>ccccccccc</li>
+                <li>ddddddddd</li>
+                <li>eeeeeeeee</li>
+            </ol>
+        </div>
+    </div>
+    <script>
+    // 1.getElementById()： 获取特定 ID 元素的节点
+        
+    // 2.getElementsByTagName()： 获取相同元素的节点列表，返回类数组，使用[0]来获取
+        var odiv=window.document.getElementsByTagName('div')[0];
+        var odiv1=odiv.getElementsByTagName('div');
+        alert(odiv1.length);
+
+    // 3.getElementsByClassName()： 获取相同类名的节点列表（IE8及以下不支持），返回类数组
+        var hh=(window.document.getElementsByClassName('cla1'));
+        alert(hh[0].className);
+        alert(hh[1].id); 
+
+    // 4.getElementsByName()： 获取相同的name值的元素列表，返回类数组
+        
+    // 5.querySelector()： 通过选择器获取元素，如果获取多个只返回第一个。
+        var ali=document.querySelector('#box li');
+        alert(ali.innerHTML);
+    // 6.querySelectorAll()： 通过选择器获取元素，可同时获取多个元素。
+        var ali1=document.querySelectorAll('#box2 li');
+        alert(ali1.length);
+        alert(ali1[3].innerHTML);
+
+    </script>
+</body>
+</html>

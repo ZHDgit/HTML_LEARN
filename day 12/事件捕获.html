@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            .box{width:200px;
+            height:200px;
+            background:red;
+            margin:50px 0 0 100px}
+        </style>
+</head>
+<body>
+        <div class="box"></div>
+        <script>
+            var obox=document.querySelector('.box');
+            function fn(){
+                alert(this.nodeName);
+            }
+            function add(obj,etype,fn,bool){
+                if(obj.addEventListener){
+                    obj.addEventListener(etype,fn,bool);
+                }else{
+                    obj.attachEvent('on'+etype,fn);
+                }
+            }
+            add(obox,'click',fn,false);
+            add(document.body,'click',fn,true);
+            add(document.documentElement,'click',fn,false);
+            add(document,'click',fn,true);
+        </script>
+</body>
+</html>

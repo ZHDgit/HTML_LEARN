@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var oBox=document.querySelector('.box');
+        var timer=null;
+        var speedx=40;
+        var speedy=60;
+        oBox.onclick=function(){
+            clearInterval(timer);
+            timer=setInterval(function(){
+                var l=oBox.offsetLeft+speedx;
+                var t=oBox.offsetTop+speedy;
+                if(l>=document.documentElement.clientWidth-oBox.offsetWidth){
+                    speedx*=-1;
+                    l=document.documentElement.clientWidth-oBox.offsetWidth;
+                }else if(l<=0){
+                    speedx*=-1;
+                    l=0;
+                }if(t>=document.documentElement.clientHeight-oBox.offsetHeight){
+                    speedy*=-1;
+                    t=document.documentElement.clientHeight-oBox.offsetHeight;
+                }else if(t<=0){
+                    speedy*=-1;
+                    t=0;
+                }
+                oBox.style.left=l+'px';
+                oBox.style.top=t+'px';
+            },300)
+        }
+    
+    </script>
+</body>
+</html>

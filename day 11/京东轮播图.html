@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        li{list-style:none}
+        img{display:block}
+        .baidu{
+            width: 790px;
+			height:340px;
+			border: 1px solid red;
+			margin:20px auto;
+			position: relative;
+        }
+        .baidu ul li{
+            position:absolute;
+            opacity: 0;
+            transition: all 1s;
+        }
+        .baidu ol{
+			position: absolute;
+			right:20px;
+			bottom: 20px;
+		}
+        .baidu ol li{
+            float:left;
+            width:20px;
+            height:20px;
+            border-radius: 50%;
+            margin-right:10px;
+            background:#ccc;
+        }
+        .baidu ol li.active{
+            background:orchid;
+        }
+        .leftbtn,.rightbtn{
+            font-size:100px;
+            text-decoration: none;
+            color:#fff;
+            position:absolute;
+            top:50%;
+            margin-top:-70px;
+        }
+        .leftbtn{
+            left:20px;
+        }
+        .rightbtn{
+            right:20px
+        }
+        .leftbtn:hover,.rightbtn:hover{
+			color:black;
+		}
+    </style>
+</head>
+<body>
+    <div class="baidu">
+        <ul>
+            <li style='opacity: 1;'><a herf="#"><img src="img/1.jpg"></a></li>
+            <li><a herf="#"><img src="img/2.jpg"></a></li>
+            <li><a herf="#"><img src="img/3.jpg"></a></li>
+            <li><a herf="#"><img src="img/4.jpg"></a></li>
+            <li><a herf="#"><img src="img/5.jpg"></a></li>
+            <li><a herf="#"><img src="img/6.jpg"></a></li>
+            <li><a herf="#"><img src="img/7.jpg"></a></li>
+            <li><a herf="#"><img src="img/8.jpg"></a></li>
+        </ul>
+        <ol>
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ol>
+        <a href="javascript:;" class="leftbtn">&lt;</a>
+		<a href="javascript:;" class="rightbtn">&gt;</a>
+    </div>
+    <script>
+        var baidu=document.querySelector('.baidu');
+        var ulLi=document.querySelectorAll('.baidu ul li');
+        var olLi=document.querySelectorAll('.baidu ol li');
+        var leftbtn=document.querySelector('.leftbtn');
+        var rightbtn=document.querySelector('.rightbtn');
+        var num=0;//存放索引
+        var timer=null;
+        //点击小圆圈事件
+        for(var i=0;i<olLi.length;i++){
+            olLi[i].index=i;
+            olLi[i].onmouseover=function(){
+                num=this.index;
+                tab();
+            }
+        }
+        //点击切换按钮事件
+        rightbtn.onclick=function(){
+            num++;
+            if(num>ulLi.length-1){
+                num=0;
+            }
+            tab();
+        }
+        leftbtn.onclick=function(){
+            num--;
+            if(num<0){
+                num=ulLi.length-1;
+            }
+            tab();
+        }
+        //切换函数
+        function tab(){
+            for(var j=0;j<ulLi.length;j++){
+                ulLi[j].style.opacity=0;
+                olLi[j].className='';
+            }
+            ulLi[num].style.opacity=1;
+            olLi[num].className='active';
+        }
+        //定时切换
+        timer=setInterval(function(){
+            rightbtn.onclick();
+        },2000)
+        baidu.onmouseover=function(){
+            clearInterval(timer);
+        }
+        baidu.onmouseout=function(){
+            timer=setInterval(function(){
+            rightbtn.onclick();
+        },2000)
+        }
+
+    </script>
+</body>
+</html>

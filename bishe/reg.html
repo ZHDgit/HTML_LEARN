@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<fieldset style="margin:20px auto;width:500px">
+		<legend>用户注册</legend>
+		<form action="reg.php" method="post">
+			<p>输入学号：<input type="text" name="id"><span></span></p>
+			<p>输入姓名：<input type="text" name="username"><span></span></p>
+			<p>用户密码：<input type="password" name="pass"><span></span></p>
+			<p>重复密码：<input type="password" name="passwors1"><span></span></p>
+			<p><input type="submit" name="submit" value="确定注册"></p>
+		</form>
+	</fieldset>
+	<script type="text/javascript" src="ajaxfuction.js"></script>
+	<script type="text/javascript">
+		var aInput=document.querySelectorAll('input');
+		var aSpan=document.querySelectorAll('span');
+		aInput[0].onblur=function(){
+			ajax({
+				type:'post',
+				url:'reg.php',
+				data:{
+					id:aInput[0].value
+				},
+				cgfn:function(da){
+					if(da==1){
+						aSpan[0].innerHTML="学号已存在";
+						aSpan[0].style.color='red';
+					}else{
+						aSpan[0].innerHTML="√";
+						aSpan[0].style.color='green';
+					}
+				}
+			})
+		}
+	</script>
+</body>
+</html>

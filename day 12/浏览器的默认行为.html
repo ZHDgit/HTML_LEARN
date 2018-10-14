@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;list-style:none}
+        .box{
+            border:1px solid #333;
+            width:200px;
+            height:200px;
+            background:#666;
+            color:black;
+            font-size:18px;
+            display:none;
+            position:absolute
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>11111111111</li>
+            <li>11111111111</li>
+            <li>11111111111</li>
+            <li>11111111111</li>
+            <li>11111111111</li>
+            <li>11111111111</li>
+        </ul>
+    </div>
+    <script>
+        var obox=document.querySelector('.box');
+        document.oncontextmenu=function(ev){
+            var ev=ev||window.event;
+            ev.preventDefault();
+            obox.style.display='block';
+            obox.style.left=ev.clientX+'px';
+            obox.style.top=ev.clientY+'px';
+        }
+        document.onclick=function(){
+            obox.style.display='none';
+        }
+    </script>
+</body>
+</html>

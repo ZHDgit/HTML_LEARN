@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        li{list-style:none}
+        a{text-decoration: none}
+        img{display:block}
+        .box{
+            position:relative;
+            margin:20px auto;
+            width:790px;
+            height:340px;
+            overflow:hidden;
+            border:1px solid black;
+        }
+        .box ul{
+            position:absolute;
+            
+        }
+        .box ul li{
+            float:left;
+            width:790px;
+        }
+        .box ol{
+            width:170px;
+            line-height:40px;
+            position:absolute;
+            bottom:20px;
+            left:50%;
+            left:300px;
+            background:rgba(0,0,0,0.3);
+            border-radius:20px;
+            padding:10px 0 10px 20px
+        }
+        .box ol li{
+            background:#fff;
+            float:left;
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            margin-right:10px;
+            text-indent:-999px;
+        }
+        .btn-left,.btn-right{
+            position:absolute;
+            width:100px;
+            height:80px;
+            line-height:70px;
+            top:138px;
+            font-size:100px;
+            color:#fff;
+            display:none;
+            background:rgba(0,0,0,0.3);
+            border-radius:40px
+        }
+        .btn-left:hover,.btn-right:hover{
+            color:orange;
+        }
+        .btn-left{
+            left:15px;
+        }
+        .btn-right{
+            text-indent:15px;
+            right:15px;
+        }
+        .box ol li.active{
+            background:orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="taobao/1.jpg"></li>
+            <li><img src="taobao/2.jpg"></li>
+            <li><img src="taobao/3.jpg"></li>
+            <li><img src="taobao/4.jpg"></li>
+            <li><img src="taobao/5.jpg"></li>
+        </ul>
+        <ol>
+            <li class="active">1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+        </ol>
+        <a href="javascript:;" class="btn-left">&lt</a>
+        <a href="javascript:;" class="btn-right">&gt</a>
+    </div>
+    <script src="taobao.js"></script>
+    <script>
+        //1.获取元素
+        var oBox=document.querySelector('.box');
+        var moveul=document.querySelector('.box ul');
+        var picli=document.querySelectorAll('.box ul li');//5
+        var btns=document.querySelectorAll('.box ol li');
+        var btnleft=document.querySelector('.btn-left');
+        var btnright=document.querySelector('.btn-right');
+        var br=true;//判断点击事件下的运动是否结束
+        var timer=null;
+        //2.改变ul布局
+        var onepic=moveul.children[0].cloneNode(true);//克隆第一张图片
+        moveul.appendChild(onepic);
+        var lastpic=moveul.children[picli.length-1].cloneNode(true);//克隆最后张图片
+        moveul.insertBefore(lastpic,moveul.children[0]);
+        //3.设置ul的尺寸
+        picli=document.querySelectorAll('.box ul li');//7
+        var onecc=picli[0].offsetWidth;//一张图片的宽度
+        moveul.style.width=onecc*picli.length+'px';
+        moveul.style.left=-onecc+'px';//将第一张图片默认显示在盒子里
+        //4.点击小圆圈切换图片
+        var num=0;//存放索引
+        for(var i =0;i<btns.length;i++){
+            btns[i].index=i;//自定义索引
+            btns[i].onclick=function(){
+                num=this.index;
+                tep();
+                btns[num].className='active';               
+            }
+        }
+        //  5.点击切换按钮 切换
+        oBox.onmousemove=function(){
+           btnleft.style.display='block';
+           btnright.style.display='block';
+           clearInterval(timer);          
+        }
+        oBox.onmouseout=function(){
+           btnleft.style.display='none';
+           btnright.style.display='none'; 
+           timer=setInterval(function(){
+               btnright.onclick();
+           },2000)          
+        }
+        btnright.onclick=function(){
+            if(br){
+                br=false;
+                num++;           
+                tep();
+                if(num==btns.length){
+                    btns[0].className='active';
+                }else{
+                    btns[num].className='active';
+                } 
+            }           
+        }
+        btnleft.onclick=function(){
+            if(br){
+                br=false;
+                num--;           
+                tep();
+                if(num==-1){
+                btns[btns.length-1].className='active';
+                }else{
+                    btns[num].className='active'; 
+                }     
+            }
+                            
+           }
+        //切换函数封装
+        function tep(){
+            for(var i=0;i<btns.length;i++){//清除默认小圆圈默认的样式
+                    btns[i].className='';
+                }               
+                buffermotion(moveul,{left:-onecc*(num+1)},function(){
+                    if(num==btns.length){//这是最后一张的时候 直接跳转到第一张
+                        moveul.style.left=-onecc+'px';
+                        num=0;//重置
+                    }
+                    if(num==-1){//这是第一张往左
+                        moveul.style.left=-onecc*btns.length+'px';
+                        num=btns.length-1;
+                    }
+                    br=true;//运动结束后才可以继续点击否则点击无效
+            });
+        }
+           //7.自动轮播
+           timer=setInterval(function(){
+               btnright.onclick();
+        },2000)
+        var  aa=new Date();
+    </script>
+</body>
+</html>

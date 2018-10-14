@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <table border="1">
+                <tr>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                </tr>
+                <tr>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                </tr>
+                <tr>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                </tr>
+                <tr>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                    <td>11111111111111</td>
+                </tr>
+            </table>
+        <script>
+            var otd=document.querySelectorAll('td');
+            for(var i =0;i<otd.length;i++){
+                otd[i].onclick=function(){
+                    this.innerHTML='<input type="text" value="'+this.innerText+'">';
+                    //清除冒泡的影响
+                    this.children[0].onclick=function(ev){
+                        var ev=ev||window.event;
+                        if(ev.stopPropagation){
+                            ev.stopPropagation();
+                        }else{
+                            ev.cancleBubble=true;
+                        }
+                    }
+                    //失去焦点时清除Input
+                    this.children[0].onblur=function(){
+                        this.outerHTML=this.value;
+                    }
+                }
+            }
+        </script>
+</body>
+</html>

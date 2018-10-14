@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p{padding:0;margin:0}
+        input{
+           margin-top:20px; 
+        }
+        p{
+            color:red;
+            text-indent:68px;
+            height:20px;
+            
+        }
+    </style>
+</head>
+<body>
+    <fieldset style='width:500px;margin:20px auto'>
+    <legend>验证表单</legend>
+     <form action="http://www.taobao.com">
+        用户名：<input type="text"><span></span><p>请输入4-20个字符</p>
+        密码：<input type="password"><span></span><p>请输入6-20个字符</p><br>
+        <button>提交</button>
+    </form>
+</fieldset>
+    <script>
+        var form1=document.querySelector('form');
+        var aInput=document.querySelectorAll('input');
+        var aSpan=document.querySelectorAll('span');
+        var aP=document.querySelectorAll('p');
+        var detectionUse=true;
+        for(var i=0;i<aP.length;i++){
+            aP[i].style.visibility='hidden'
+             
+        }
+            aInput[0].onfocus=function(){
+                aP[0].style.visibility='visible';
+            }
+            aInput[1].onfocus=function(){
+                aP[1].style.visibility='visible';
+            }
+        aInput[0].onblur=function(){
+            aP[0].style.visibility='hidden';
+            if(this.value!=''){
+                var reg=/^\w{4,20}$/;
+                if(reg.test(this.value)){
+                    aSpan[0].innerHTML='√';
+                    detectionUse=true;
+                }
+                else{
+                    aSpan[0].innerHTML='格式不对！';
+                    detectionUse=false;
+                }
+            }else{
+                aSpan[0].innerHTML='用户名不能为空！';
+                detectionUse=false;
+            }
+        }
+        aInput[1].onblur=function(){
+            aP[1].style.visibility='hidden';
+            if(this.value!=''){
+                var reg=/^[\w\W]{6,20}$/;
+                if(reg.test(this.value)){
+                    aSpan[1].innerHTML='√';
+                    detectionPas=true;
+                }
+                else{
+                    aSpan[1].innerHTML='格式不对！';
+                    detectionPas=false;
+                }
+            }else{
+                aSpan[1].innerHTML='密码不能为空！';
+                detectionPas=false;
+            }
+        }
+        
+        form1.onsubmit=function(){
+            if(aInput[0].value==''){
+                aSpan[0].innerHTML='用户名不能为空！';
+                detectionUse=false;
+            }
+            if(!detectionUse){
+                return false;
+            }
+            if(aInput[1].value==''){
+                aSpan[1].innerHTML='密码不能为空！';
+                detectionUse=false;
+            }
+            if(!detectionUse){
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

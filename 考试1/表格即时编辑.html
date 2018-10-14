@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:500px;
+            margin:0 auto;
+        }
+        .in{
+            width:300px;
+            margin-bottom:10px
+        }
+    </style>
+</head>
+<body>
+    <div>
+        表格的即时编辑<br><hr>
+        标题：<input type="text" class="in"><br>
+        内容：<input type="text" class="in"><br>
+        作者：<input type="text" class="in"><br>
+        <button>保存</button>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>帖子名称</td>
+                <td>内容预览</td>
+                <td>发布时间</td>
+                <td>作者</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>不知道</td>
+                <td>xxxxxxxx</td>
+                <td>2018-9-18</td>
+                <td>张鸿</td>
+                <td><a href="javascript:;">详细信息</a> <a class="del" href="javascript:;">删除</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>不知道</td>
+                <td>xxxxxxxx</td>
+                <td>2018-9-18</td>
+                <td>张鸿</td>
+                <td><a href="javascript:;">详细信息</a><a class="del" href="javascript:;">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var bt=document.querySelector('button');
+        var oinput=document.querySelectorAll('input');
+        var otable=document.querySelector('table');
+        var a=new Date();
+        var id=2;
+        var otd=document.querySelectorAll('td');
+        bt.onclick=function(){
+            if(oinput[0].value==''||oinput[1].value==''||oinput[2].value==''){
+                if(confirm('请正确填写！'))
+                return false;
+            }
+            var time=a.getFullYear()+'-'+(a.getMonth()+1)+'-'+a.getDay();
+            id++;
+            var ctr=document.createElement('tr');
+            ctr.innerHTML=`<td>${id}</td><td>${oinput[0].value}</td><td>${oinput[1].value}</td><td>${time}</td><td>${oinput[2].value.substr(0,10)}</td><td><a href="javascript:;">详细信息</a> <a class="del" href="javascript:;">删除</a></td>`;
+            otable.appendChild(ctr);
+            for(var i= 0;i<oinput.length;i++){
+                oinput[i].value='';
+            }
+        }
+        otable.onclick=function(ev){
+            var ev=ev||window.event;
+            var target=ev.target||ev.srcElement;
+            if(target.nodeName=='TD'){
+                target.innerHTML="<input value="+target.innerHTML+">";
+                var inp=this.querySelector('input');
+                inp.focus();//得到焦点
+                inp.onblur=function(){//失去焦点
+                this.parentNode.innerHTML=this.value;
+             }
+            }
+            if(target.nodeName=='A'&&target.className=="del"){
+                alert(target.parentNode.parentNode);
+        target.parentNode.parentNode.parentNode.removeChild(target.parentNode.parentNode);
+            }
+              
+        }
+    </script>
+</body>
+</html>

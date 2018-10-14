@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0
+        }
+        .box{
+            width:100px;
+            height:100px;
+            position:absolute;
+            left:0;
+            top:0;
+            background:red;
+            cursor:pointer;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        function Deg(){
+            this.box=document.querySelector('.box');
+            this.shortx=null;
+            this.shorty=null;
+            var that=this;
+            this.init=function(){
+                this.box.onmousedown=function(ev){
+                    var ev=ev||window.event;
+                    that.down(ev);
+                    document.onmousemove=function(ev){
+                        var ev=ev||window.event;
+                        that.move(ev);                                    
+                    }
+                    document.onmouseup=that.up;//没有参数时，直接写函数名，不需要括号 
+                    return  false;
+                }
+            };
+            this.down=function(ev){
+                this.shortx=ev.offsetX;
+                this.shorty=ev.offsetY;
+            };
+            this.move=function(ev){
+                this.box.style.left=ev.clientX-this.shortx+'px';
+                this.box.style.top=ev.clientY-this.shorty+'px';
+            };
+            this.up=function(){
+                document.onmousemove=null;
+                document.onmouseup=null; 
+            }
+
+        }
+        new Deg().init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            *{margin:0;padding:0}
+            .box{
+                width:100px;
+                height:100px;
+                background:blue;
+                position:absolute;
+                left:0px;
+                top:0;
+            }
+            .haha{
+                width:1px;
+                height:700px;
+                background:black;
+                position:absolute;
+                left:700px;
+                top:0
+            }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="haha"></div>
+    <script>
+            var oBox=document.querySelector('.box');
+            var timer=null;
+            var speed=0;
+            var i=0;
+            oBox.onclick=function(){
+                clearInterval(timer);
+            timer=setInterval(function(){
+                i++;
+                speed=Math.ceil((700-oBox.offsetLeft)/10);
+                //speed=Math.floor((700-oBox.offsetLeft)/10);//右边靠近                     
+                if(oBox.offsetLeft==700){
+                    console.log(i);
+                    clearInterval(timer);
+                }
+                oBox.style.left=oBox.offsetLeft+speed+'px'; 
+            },30)
+            }
+        
+
+    </script>
+</body>
+</html>

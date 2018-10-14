@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;}
+        
+        .wrap{
+            margin:50px 0 0 50px;
+        }
+        .smallpic{
+            width:450px;
+            height:450px;
+            border:1px solid #ccc;
+            float:left;
+            margin-right:20px;
+            position:relative;
+        }
+        .smallpic img{
+            display:block;
+            width:450px;
+        }
+        .bigfdj{
+            width:540px;
+            height:540px;
+            float:left;
+            border:1px solid #ccc;
+            overflow: hidden;
+            position:relative;
+            visibility: hidden;
+        }
+        .bigpic{
+            width:800px;
+            height:800px;
+            display:block;
+            left:0;
+            top:0;
+            position:absolute;
+        }
+        .smallfdj{
+            background:red;
+            opacity:0.5;
+            left:0;
+            top:0;
+            height:0px;
+            position:absolute;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+    <div class="smallpic">
+        <img src="taobao/phone.jpg">
+        <div class="smallfdj"></div>
+    </div>
+    <div class="bigfdj">
+            <img class="bigpic" src="taobao/phone.jpg">
+    </div>
+    <script>
+        //获取元素
+        var wrap=document.querySelector('.wrap');
+        var smallpic=document.querySelector('.smallpic');
+        var smallfdj=document.querySelector('.smallfdj');
+        var bigfdj=document.querySelector('.bigfdj');
+        var bigpic=document.querySelector('.bigpic');
+        //等比例计算出小的放大镜的尺寸
+        smallfdj.style.width=smallpic.offsetWidth*bigfdj.offsetWidth/bigpic.offsetWidth+'px';
+        smallfdj.style.height=smallpic.offsetHeight*bigfdj.offsetHeight/bigpic.offsetHeight+'px';
+        //比例需要>1
+        var bili=bigpic.offsetWidth/smallpic.offsetWidth;
+
+        wrap.onmouseover=function(){
+            bigfdj.style.visibility='visible';
+            smallfdj.style.visibility='visible';
+            this.onmousemove=function(ev){
+                var ev=ev||window.event;
+                var l=ev.clientX-wrap.offsetLeft-smallfdj.offsetWidth/2;
+                var t=ev.clientY-wrap.offsetTop-smallfdj.offsetHeight/2;
+                if(l<0){
+                    l=0;
+                }if(l>=smallpic.offsetWidth-smallfdj.offsetWidth){
+                    l=smallpic.offsetWidth-smallfdj.offsetWidth-2;
+                }
+                if(t<0){
+                    t=0;
+                }if(t>=smallpic.offsetHeight-smallfdj.offsetHeight){
+                    t=smallpic.offsetHeight-smallfdj.offsetHeight-2;
+                }
+                smallfdj.style.left=l+'px';
+                smallfdj.style.top=t+'px';
+                bigpic.style.left=-l*bili+'px';
+                bigpic.style.top=-t*bili+'px';
+            }
+        }
+        wrap.onmouseout=function(){
+            bigfdj.style.visibility='hidden';
+            smallfdj.style.visibility='hidden';
+        }
+        
+    
+    </script>
+</div>
+</body>
+</html>

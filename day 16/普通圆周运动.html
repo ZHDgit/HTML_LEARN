@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:10px;
+            height:10px;
+            background:red;
+            position:absolute;
+            left:500px;
+            top:300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var oBox=document.querySelector('.box');
+        var a=400;
+        var b=300;
+        var r=100;
+        var angle=0
+        setInterval(function(){
+            angle++;
+            var x=a+Math.sin(angle*Math.PI/180)*r;
+            var y=b+Math.cos(angle*Math.PI/180)*r;
+            oBox.style.left=x+'px';
+            oBox.style.top=y+'px';
+            var aDiv=document.createElement('div');
+            aDiv.style.cssText=`background:red;width:5px;height:5px;position:absolute;left:${oBox.offsetLeft}px;top:${oBox.offsetTop}px`;
+            document.body.appendChild(aDiv);
+        },30);
+    </script>
+</body>
+</html>

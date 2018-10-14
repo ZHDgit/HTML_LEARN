@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var ajax=new XMLHttpRequest();
+		ajax.open('get','http://localhost/mywook/day%2023/ajax.php',true);
+		ajax.send();
+		ajax.onreadystatechange=function(){
+			if(ajax.readyState==4){
+				document.body.innerHTML=ajax.responseText;
+			}
+		}
+	</script>
+</body>
+</html>

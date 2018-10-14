@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0}
+        li{list-style-type: none;}
+    </style>
+</head>
+<body>
+    <ul>
+        <li>婷婷是佩奇1</li>
+        <li>婷婷是佩奇2</li>
+        <li>婷婷是佩奇3</li>
+        <li>婷婷是佩奇4</li>
+        <li>婷婷是佩奇5</li>
+        <li>婷婷是佩奇6</li>
+        <li>婷婷是佩奇7</li>
+        <li>婷婷是佩奇8</li>
+        <li>婷婷是佩奇9</li>
+        <li>婷婷是佩奇10</li>
+        <li>婷婷是佩奇11</li>
+    </ul>
+    <script>
+        var ali=document.getElementsByTagName('li');
+        for(var i = 0;i < ali.length;i++){
+            ali[i].onclick=function(){
+                alert(this.innerHTML);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box{
+            width:1100px;
+            height:700px;
+            margin:20px auto;
+            border:2px solid red;
+            background:black;
+            position:relative;
+        }
+        img{
+            width:30px;
+            height:30px;
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        
+    </div>
+    <script src="xuehua.js"></script>
+    <script>
+        function Firework(){
+            this.obox=document.querySelector('.box');
+            this.speedx=5;
+            this.speedy=4;
+            this.cw=this.obox.clientWidth;
+            this.ch=this.obox.clientHeight;
+
+        }
+        //创建
+        Firework.prototype.create=function(){
+            this.fire=document.createElement('img');
+            this.fire.src="img/2.png"
+            this.fire.style.left=this.rannum(10,this.cw-this.fire.offsetWidth)+'px';
+            this.fire.style.top=this.rannum(0)+'px';
+            this.obox.appendChild(this.fire);
+            this.remove(this.fire); 
+        }
+        //运动
+        Firework.prototype.remove=function(obj){
+            var that=this;
+            obj.timer=setInterval(function(){
+                that.speedx+=0.5;
+                that.speedy+=5;
+                console.log(that.speedy);
+                if(that.speedy>=80||that.speedx>=10){
+                    clearInterval(obj.timer);
+                    that.obox.removeChild(obj);
+                }
+                obj.style.left=that.fire.offsetLeft+that.speedx+'px';
+                obj.style.top=that.fire.offsetTop+that.speedy+'px';
+            },300)
+            
+            
+        }
+        Firework.prototype.rannum=function(min,max){
+            return Math.round(Math.random()*(max-min))+min;
+        }
+        for(var i=0;i<50;i++){
+            new Firework().create();
+        }
+        
+    </script>
+</body>
+</html>

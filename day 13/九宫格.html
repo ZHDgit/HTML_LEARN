@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;padding:0;
+        }
+        html,body{
+            width:100%;
+            height:100%;
+            overflow: hidden;
+        }
+        .box{
+            width:930px;
+            height:420px;
+            border:1px solid red;
+            margin:30px auto;padding:5px;
+        }
+        .box li{
+            list-style:none;
+            float:left;
+            margin:5px; 
+        }
+        .box li img{
+            display:block;
+            width:300px;
+            height:130px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="img/1.jpg"></li>
+            <li><img src="img/2.jpg"></li>
+            <li><img src="img/3.jpg"></li>
+            <li><img src="img/4.jpg"></li>
+            <li><img src="img/5.jpg"></li>
+            <li><img src="img/6.jpg"></li>
+            <li><img src="img/7.jpg"></li>
+            <li><img src="img/8.jpg"></li>
+            <li><img src="img/9.jpg"></li>
+        </ul>
+    </div>
+    <script>
+        var zindex=1;//层叠值
+        //1.将浮动布局改成定位布局，取位置值并且赋值
+        var ali=document.querySelectorAll('.box ul li');
+        var picposition=[];//存放位置值得二维数组
+        for(var i=0;i<ali.length;i++){            
+            picposition.push([ali[i].offsetLeft,ali[i].offsetTop]);
+        }
+        for(var i=0;i<ali.length;i++){
+            ali[i].style.position='absolute'
+            ali[i].style.left=picposition[i][0]+'px';
+            ali[i].style.top=picposition[i][1]+'px';
+            ali[i].style.margin=0;
+        }
+        //2.拖拽
+        for(var i=0;i<ali.length;i++){
+            ali[i].index=i;
+            drag(ali[i]);
+        }
+        //封装好的拖拽函数
+        function drag(obj){
+            var shortx=0;
+            var shorty=0;
+            obj.onmousedown=function(ev){
+                var ev=ev||window.event;
+                shortx=ev.offsetX;
+                shorty=ev.offsetY;
+                obj.style.zIndex=zindex++;
+                document.onmousemove=function(ev){
+                    var ev=ev||window.event;
+                    var l=ev.clientX-shortx;
+                    var t=ev.clientY-shorty;
+                    if(l<=0){
+                        l=0;
+                    }else if(l>document.documentElement.clientWidth-obj.offsetWidth){
+                        l=document.documentElement.clientWidth-obj.offsetWidth;
+                    }
+                    if(t<=0){
+                        t=0;
+                    }else if(t>document.documentElement.clientHeight-obj.offsetHeight){
+                        t=document.documentElement.clientHeight-obj.offsetHeight;
+                    }
+                    //4.碰撞检测测试
+                    for(var i=0;i<ali.length;i++){
+                        ali[i].style.border=0;
+                    }
+                    var minli=getminli(obj);
+                    if(minli){
+                        minli.style.border='3px solid blue'
+                    }
+
+
+                    obj.style.left=l+'px';
+                    obj.style.top=t+'px';
+                }
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+					document.onmouseup=null;
+                    //交换位置
+                    var minbox=getminli(obj);
+                    // console.log(picposition[obj.index][0]);
+                    if(minbox){
+                        minbox.style.left=picposition[obj.index][0]+'px';
+                        minbox.style.top=picposition[obj.index][1]+'px';
+                        obj.style.left=picposition[minbox.index][0]+'px';
+                        obj.style.top=picposition[minbox.index][1]+'px';
+                        var temp;
+                        temp=minbox.index;
+                        minbox.index=obj.index;
+                        obj.index=temp;
+                        minbox.style.border=0;
+                    }else{
+                        obj.style.left=picposition[obj.index][0]+'px';
+                        obj.style.top=picposition[obj.index][1]+'px';
+                    }
+                }
+                return false;
+            }
+        }
+        //3.碰撞检测
+        function hit(obj1,obj2){
+			if(!(obj1.offsetLeft+obj1.offsetWidth<obj2.offsetLeft || 
+			obj1.offsetLeft>obj2.offsetLeft+obj2.offsetWidth || 
+			obj1.offsetTop+obj1.offsetHeight<obj2.offsetTop || 
+			obj1.offsetTop>obj2.offsetTop+obj2.offsetHeight)){
+				return true
+			}else{
+				return false;
+			}
+		}
+        //5.勾股定理
+        function gg(obj1,obj2){
+            var a=obj1.offsetLeft-obj2.offsetLeft;
+            var b=obj1.offsetTop-obj2.offsetTop;
+            return Math.sqrt(a*a+b*b);
+        }
+        //6.拖拽找到最小Li
+        function getminli(obj){
+            var mindex=-1;
+            var minvalue=10000;
+            for(var i=0;i<ali.length;i++){
+                if(hit(obj,ali[i]) && obj!=ali[i]){
+                    var arr=gg(obj,ali[i]);
+                    if(arr<minvalue){
+                        minvalue=arr;
+                        mindex=i;
+                    }
+                }     
+            }
+            if(mindex!=-1){
+                    return ali[mindex];
+                }
+        }
+    </script>
+</body>
+</html>

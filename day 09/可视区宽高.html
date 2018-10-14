@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            *{margin:0;padding:0}
+            #box1{
+                height:200px;
+                width:200px;
+                background:red;
+                position:absolute
+            }
+        </style>
+</head>
+<body style="height:3000px">
+    <script>
+         //4.可视区宽跟高，做定位的
+         window.onload=window.onresize=function(){
+            var box=document.getElementById('box1');
+            box.style.left=(document.documentElement.clientWidth-200)/2+'px';
+            box.style.top=(document.documentElement.clientHeight-200)/2+'px';
+        }
+        window.onscroll=function(){
+            var box=document.getElementById('box1');
+            box.style.left=(document.documentElement.clientWidth-200)/2+'px';
+            box.style.top=(document.documentElement.clientHeight-200)/2+document.documentElement.scrollTop+'px';
+        }
+        </script>
+    <div id="box1">111111</div>
+    <!-- <script>
+        //滑轮滚动时距离顶部的距离
+            window.onscroll=function(){
+                console.log(document.documentElement.scrollTop);
+                console.log(document.body.scrollTop);//不兼容
+            }
+    </script> -->
+</body>
+</html>

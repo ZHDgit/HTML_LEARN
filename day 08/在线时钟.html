@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function time(){
+            function double(n){ 
+                return n<10?'0'+n:n;
+            }
+            var a=new Date();
+            var year=a.getFullYear();
+            var month=a.getMonth()+1;
+            var day=a.getDate();
+            var week=a.getDay();
+            if(week==0){
+                week='星期日';
+            }
+            if(week==1){
+                week='星期一';
+            }
+            if(week==2){
+                week='星期二';
+            }
+            if(week==3){
+                week='星期三';
+            }
+            if(week==4){
+                week='星期四';
+            }
+            if(week==5){
+                week='星期五';
+            }
+            if(week==6){
+                week='星期六';
+            }
+            var hour=a.getHours();
+            var min=a.getMinutes();
+            var sec=a.getSeconds();
+            return year+'年'+month+'月'+day+'日&nbsp&nbsp'+week+'&nbsp&nbsp'+hour+':'+double(min)+':'+double(sec);
+        }
+    document.body.innerHTML=time();
+    setInterval(function(){
+        document.body.innerHTML=time();
+    },1000)
+    
+    </script>
+</body>
+</html>

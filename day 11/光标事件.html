@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{background:url(11.png);height:1029px;width:1920px}
+        .box{
+            height: 648px;
+            width: 1152px;
+            position: absolute;
+            left: 5px;
+            top: 190px;
+            cursor: move;
+        }
+        .box1{position:absolute;
+        left:20px;
+        bottom:-350px}
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box1">
+        x:<input type="text" name=''>
+        y:<input type="text" name=''>
+    </div>
+    <script>
+        var oBox=document.querySelector('.box');
+        var oInput=document.querySelectorAll('input');
+        oBox.onmousemove=function(ev){
+            var ev=ev||window.event;
+            oInput[0].value=ev.clientX+'像素';
+            oInput[1].value=ev.clientY+'像素';
+        }
+        oBox.onmouseout=function(){
+            var ev=ev||window.event;
+            oInput[0].value='';
+            oInput[1].value=''; 
+        }
+    
+    </script>
+</body>
+</html>

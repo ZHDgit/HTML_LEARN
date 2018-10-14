@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="main">
+		<a href="login.html">登录</a>
+		<a href="reg.html">注册</a>
+	</div>
+	<div class="login" style="display:none">
+		<span></span>,欢迎光临！<a href="">退出</a>
+	</div>
+	<script type="text/javascript" src="cookie.js"></script>
+	<script type="text/javascript">
+		var admin=document.querySelector('#main');
+		var login=document.querySelector('.login');
+		var oSpan=document.querySelector('span');
+		var oa=document.querySelector('.login a');
+		if(getcookie('username')){
+			admin.style.display='none';
+			login.style.display='block';
+			oSpan.innerHTML=getcookie('username');
+		}
+		oa.onclick=function(){
+			delcookie('username');
+			admin.style.display='block';
+			login.style.display='none';
+		}
+	</script>
+</body>
+</html>

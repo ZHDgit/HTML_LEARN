@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            .box{
+                    width:100px;
+                    height:100px;
+                    background:red;
+                    margin-bottom:10px;
+                }
+    </style>
+</head>
+<body>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    <script>
+        //最关键的是给每个对象都加上定时器，让他们互不干扰
+        //将定时器的变量变成属性var timer=null;//定时器-->obj.timer
+        var oBox=document.querySelectorAll('.box');
+        //var timer=null;//定时器
+        //函数测试
+        var len=oBox.length;
+        for(let i=0;i<len;i++){
+            oBox[i].onmousemove=function(){
+                buffermotion(this,'width',800);
+            }
+            oBox[i].onmouseout=function(){
+                buffermotion(this,'width',100);
+            }
+        }
+
+
+
+        //去元素属性兼容
+        function getstyle(obj,attr){
+            if(window.getComputedStyle){//标准
+                return window.getComputedStyle(obj)[attr]
+            }else{
+                return obj.currenStyle[attr];
+            }
+        }
+        //缓冲运动
+        function buffermotion(obj,attr,target,fn){
+            //obj:操作的对象 attr:操作的属性 target:最终目标  fn:回调函数
+            clearInterval(obj.timer);
+            var speed=0;//运动的幅度
+            obj.timer=setInterval(function(){
+                var attrvalue=0;//属性值
+                //属性判断
+                if(attr=='opacity'){
+                    attrvalue=Math.round(getstyle(obj,attr)*100);//放大一百倍避免后续运算出错
+                }else{
+                    attrvalue=parseInt(getstyle(obj,attr));
+                }
+                speed=(target-attrvalue)/10;//速度变化
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);//变化原则
+                //判断运动结束
+                if(target==attrvalue){
+                    clearInterval(obj.timer);
+                    //判断回调函数是否存在，存在就是执行
+                    fn&&fn();
+                }else{
+                    if(attr=='opacity'){
+                        obj.style.opacity=(attrvalue+speed)/10;//标准 数据还原 
+                        obj.style.filter='a1pha(opacity='+attrvalue+speed+')';//ie
+                    }else{
+                        obj.style[attr]=attrvalue+speed+'px';
+                    }
+                }
+            },30)
+        }
+    </script>
+</body>
+</html>

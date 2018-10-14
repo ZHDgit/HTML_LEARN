@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul{border:1px solid red;width:600px;margin:20px auto}
+        li{list-style:none;margin-bottom:30px;}
+        a{
+            margin-right:60px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function hh(){
+           var ajax=new XMLHttpRequest();
+            ajax.open('get','new.php',true);
+            ajax.send();
+            ajax.onreadystatechange=function(){
+                if(ajax.readyState==4){
+                var arr=JSON.parse(ajax.responseText);//ajax.responseText得到后端数据字符串
+                var str='';
+                str+='<ul>';
+                for(var i= 0;i<arr.length;i++){
+                    str+=`<li><a href="#">${arr[i].title}</a><span>${arr[i].date}</span></li>`;
+                }
+                str+='</ul>';
+                document.body.innerHTML=str;
+                }
+             } 
+        }
+        hh();
+        setInterval(hh,2000);
+        
+    </script>
+</body>
+</html>

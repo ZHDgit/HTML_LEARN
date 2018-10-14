@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;list-style: none;}
+        a{text-decoration:none}
+        .tab{width:300px;
+			border: 1px solid red;
+			margin:50px auto;
+        }
+        .tab_title{background:#ccc}
+        .tab_title a{color:black;padding:0 12px}
+        .tab_title a.active{
+			color:red;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+        .tab_content{
+			padding: 10px;
+		}
+		.tab_content ul{
+			display: none;
+		}
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <div class="tab_title">
+			<a href="javascript:;" class="active">公告</a> 
+			<a href="javascript:;">规则</a> 
+			<a href="javascript:;">论坛</a> 
+			<a href="javascript:;">安全</a> 
+			<a href="javascript:;">公益</a>
+        </div>
+        <div class="tab_content">
+			<ul style="display: block;">
+				<li><a href="#">淘宝造物节1111111</a></li>
+				<li><a href="#">美食成家具纸飞机永不落地1111111</a></li> 
+				<li><a href="#">阿里智能服务2.0来临1111111</a></li> 
+				<li><a href="#">阿里巴巴9.5公益周1111111</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">淘宝造物节2222222</a></li>
+				<li><a href="#">美食成家具纸飞机永不落地2222222</a></li> 
+				<li><a href="#">阿里智能服务2.0来临2222222</a></li> 
+				<li><a href="#">阿里巴巴9.5公益周2222222</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">淘宝造物节333333333</a></li>
+				<li><a href="#">美食成家具纸飞机永不落地333333333</a></li> 
+				<li><a href="#">阿里智能服务2.0来临333333333</a></li> 
+				<li><a href="#">阿里巴巴9.5公益周333333333</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">淘宝造物节4444444444</a></li>
+				<li><a href="#">美食成家具纸飞机永不落地4444444444</a></li> 
+				<li><a href="#">阿里智能服务2.0来临4444444444</a></li> 
+				<li><a href="#">阿里巴巴9.5公益周4444444444</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">淘宝造物节5555555555</a></li>
+				<li><a href="#">美食成家具纸飞机永不落地5555555555</a></li> 
+				<li><a href="#">阿里智能服务2.0来临5555555555</a></li> 
+				<li><a href="#">阿里巴巴9.5公益周5555555555</a></li>
+			</ul>
+		</div>
+    </div>
+    <script>
+        //1.手动添加属性
+        // var aBtn=document.querySelectorAll('.tab_title a');//获取导航的a
+        // var aContentUl=document.querySelectorAll('.tab_content ul');//获取导航下的内容标签
+        // for(var i=0;i<aBtn.length;i++){
+        //     aBtn[i].index=i;//手动添加属性
+        //     aBtn[i].onclick=function(){
+        //         for(var j=0;j<aBtn.length;j++){//清空原来的样式
+        //             aBtn[j].className='';
+        //             aContentUl[j].style.display="none";
+        //         }
+        //         this.className='active';//点击时的样式
+        //         aContentUl[this.index].style.display='block';//点击时的样式
+        //     }
+        // }
+        
+    </script>
+</body>
+</html>

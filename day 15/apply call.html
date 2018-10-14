@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr={
+            name:'王明宝',
+            age:'25',
+            sex:'女',
+            haha:function(){
+                console.log(this.name+this.sex);
+            }
+        }
+        let abb={
+            name:'张鸿',
+            sex:'男'
+        }
+        arr.haha.call(abb);
+    </script>
+</body>
+</html>

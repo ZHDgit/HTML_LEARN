@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>      
+        var add=("aabbbccdeefffgghhhiiiiijjjjjjjjj"); 
+        var arr=add.split('');
+        var newarr=[];
+        var obj={};
+        for(var i = 0;i < arr.length;i++){
+            var nostop = true;
+            for(var j = 0;j < newarr.length;j++){
+                if(arr[i] == newarr[j]){
+                    obj[arr[i]]++;
+                    nostop=false;
+                }
+            }
+            if(nostop){
+                obj[arr[i]]=1;
+                newarr.push(arr[i]);
+            }
+        }
+        document.write("去重前："+arr.join('')+'<br/>');
+        document.write("去重后："+newarr.join(''));
+        console.log(obj);    
+    </script>
+</body>
+</html>

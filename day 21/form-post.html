@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        get传数据会把数据用？和&拼接在地址栏后面，安全性不好，数据还可以在地址栏上修改
+    -->
+    <fieldset style="width:500px;margin:20px auto">
+        <legend>登录注册</legend>
+        <form action="form-post.php" method="post">
+            <p>用户姓名：<input type="text"name="uesername"></p>
+            <p>用户密码：<input type="password"name="password"></p>
+            <p>用户邮箱：<input type="text"name="email"></p>
+            <p>确认提交：<input type="submit"name="submit"></p>
+        </form>
+    </fieldset>
+</body>
+</html>

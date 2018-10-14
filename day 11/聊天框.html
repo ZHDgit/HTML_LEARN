@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;list-style:none;}
+        .box{
+            position: relative;
+            margin: 20px auto;
+            border: 1px solid steelblue;
+            width: 430px;
+            height: 400px;
+            }
+        .ul1{
+            list-style: none;
+            width: 410px;
+            height: 280px;
+            margin: 5px auto;
+            border: 1px dotted #D1D3D6;
+            overflow-y: scroll;
+        }
+        .text{
+            display: block;
+            width: 406px;
+            height: 60px;
+            margin: 10px auto;
+        }
+       .bu{
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 5px;
+        right: 10px;
+       } 
+       li{
+           /* border:1px solid #333; */
+           width:100px;
+           margin-top:10px;
+       }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="ul1">
+        </ul>
+        <textarea class="text">
+        </textarea>
+        <button class="bu">发送</button>
+    </div>
+    <script>
+        var oUl=document.querySelector('.ul1');
+        var oText=document.querySelector('textarea');
+        var oBu=document.querySelector('button');
+        oText.focus();
+        oBu.onclick=function(){
+            if(oText.value!=''){   
+                var cli=document.createElement('li');
+                cli.innerHTML=oText.value;
+                oText.value='';
+                oText.focus();
+                oUl.appendChild(cli);
+               
+            }else{
+                alert('请输入有效内容!');
+                oText.focus();
+            }
+        }
+        oText.onkeydown=function(ev){
+            var cli=document.createElement('li');
+                cli.innerHTML=oText.value;
+                
+                oText.focus();
+                    var ev=ev||window.event;
+                    if(ev.keyCode==13){
+                        oUl.appendChild(cli);
+                        oText.value='';
+                    }
+                }
+    </script>
+</body>
+</html>

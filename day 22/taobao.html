@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{width:200px;height:200px;display:block}
+        *{margin:0;padding:0}
+        .box{
+            width:1350px;
+            margin:20px auto 0;
+        }
+        .box ul{
+            width:1310px;
+            padding:20px;
+        }
+        .box ul li{
+            width:210px;
+            height:300px;
+            border:1px solid #ccc;
+            float:left;
+            margin:0 10px 10px 0;
+            padding:20px;
+            list-style: none;
+            position:relative
+        }
+        p{margin:2px;}
+        span{color:red;margin-top:10px;display:block}
+        .active{
+            position:absolute;
+            top:5px;
+            right:5px;
+            cursor: pointer;
+            color:red
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- <ul>
+            <li>
+                <img src="https://img.alicdn.com/bao/uploaded/i4/TB1hfyEHXXXXXa1XFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp">
+                <p>户外秋千吊椅吊篮防腐木秋千椅户外花园庭院阳台秋千实木秋千摇椅</p>
+                <span>￥356</span>
+            </li>
+            <li>
+                    <img src="https://img.alicdn.com/bao/uploaded/i4/TB1hfyEHXXXXXa1XFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp">
+                    <p>户外秋千吊椅吊篮防腐木秋千椅户外花园庭院阳台秋千实木秋千摇椅</p>
+                    <span>￥356</span>
+                </li>
+                <li>
+                        <img src="https://img.alicdn.com/bao/uploaded/i4/TB1hfyEHXXXXXa1XFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp">
+                        <p>户外秋千吊椅吊篮防腐木秋千椅户外花园庭院阳台秋千实木秋千摇椅</p>
+                        <span>￥356</span>
+                    </li>
+                    <li>
+                            <img src="https://img.alicdn.com/bao/uploaded/i4/TB1hfyEHXXXXXa1XFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp">
+                            <p>户外秋千吊椅吊篮防腐木秋千椅户外花园庭院阳台秋千实木秋千摇椅</p>
+                            <span>￥356</span>
+                        </li>
+                        <li>
+                                <img src="https://img.alicdn.com/bao/uploaded/i4/TB1hfyEHXXXXXa1XFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp">
+                                <p>户外秋千吊椅吊篮防腐木秋千椅户外花园庭院阳台秋千实木秋千摇椅</p>
+                                <span>￥356</span>
+                            </li>
+                            <li>
+                                    <img src="https://img.alicdn.com/bao/uploaded/i4/TB1hfyEHXXXXXa1XFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp">
+                                    <p>户外秋千吊椅吊篮防腐木秋千椅户外花园庭院阳台秋千实木秋千摇椅</p>
+                                    <span>￥356</span>
+                                </li>
+                                <li>
+                                        <img src="https://img.alicdn.com/bao/uploaded/i4/TB1hfyEHXXXXXa1XFXXXXXXXXXX_!!0-item_pic.jpg_200x200q90.jpg_.webp">
+                                        <p>户外秋千吊椅吊篮防腐木秋千椅户外花园庭院阳台秋千实木秋千摇椅</p>
+                                        <span>￥356</span>
+                                    </li>
+        </ul> -->
+    </div>
+    <script>
+    var oBox=document.querySelector('.box');
+    var ajax=new XMLHttpRequest();
+    ajax.open('get','http://localhost/mywook/day%2022/taobaopic.php',true);
+    ajax.send();
+    ajax.onreadystatechange=function(){
+        if(ajax.readyState==4){
+            var arrpic=JSON.parse(ajax.responseText);
+            var str='<ul>';
+            for(var i=0;i<arrpic.length;i++){
+                 str+=`<li sid="${arrpic[i].sid}"><img src='${arrpic[i].url}'><p><a href="https://item.taobao.com/item.htm?spm=a230r.1.14.18.3a7443b71zPhOe&id=557264855568&ns=1&abbucket=3#detail">${arrpic[i].titile}</a></p><span>￥${arrpic[i].price}</span><div class="active">X</div></li>`;
+            }
+            str+='</ul>';
+            oBox.innerHTML=str;
+        }
+    }
+    oBox.onclick=function(ev){
+        var ev=ev||window.event;
+        var ele=ev.target||ev.srcElement;
+        if(ele.nodeName=='DIV'){
+            if(confirm('你确定要删除吗？')){
+            ele.parentNode.parentNode.removeChild(ele.parentNode);
+            var ajaxr=new XMLHttpRequest();
+            ajaxr.open('get','http://localhost/mywook/day%2022/deletaobao.php?sid='+ele.parentNode.getAttribute('sid'),true);
+            ajaxr.send();
+        }
+        }
+    }
+    </script>
+</body>
+</html>
